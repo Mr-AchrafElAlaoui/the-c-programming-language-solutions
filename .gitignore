@@ -1,0 +1,10 @@
+# Object files
+*.o
+
+# Compiled binary executables
+*.out
+*.exe
+*.elf
+
+# macOS or Linux system files
+.DS_Store
