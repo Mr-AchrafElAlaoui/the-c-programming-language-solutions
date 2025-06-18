@@ -13,7 +13,7 @@
 
 int main()
 {
-    int index, length, chars, state, count_char, bar;
+    int index, chars, state, count_char, bar;
     int lengths_words[MAX_LENGTH_WORD];
 
     state = OUT;
