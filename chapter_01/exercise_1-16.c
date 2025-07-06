@@ -93,10 +93,8 @@ void copy(char from[], char to[])
 
     index = 0;
 
-    while(from[index] != '\0')
+    while((to[index] = from[index]) != '\0')
     {
-        to[index] = from[index];
-
         ++index;
     }
 
