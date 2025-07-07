@@ -15,12 +15,12 @@ void copy(char from[], char to[]);
 
 int main()
 {
-    int line_lenght;    // Current line length
-    int max_lenght;     // Maximum length.
+    int line_length;    // Current line length
+    int max_length;     // Maximum length.
     char line[MAXLINE]; // Current input line.
     char longest[MAXLINE];  // Longest line saved.
 
-    max_lenght = 0;
+    max_length = 0;
 
     while((line_length = get_line(line, MAXLINE)) > 0)
     {
