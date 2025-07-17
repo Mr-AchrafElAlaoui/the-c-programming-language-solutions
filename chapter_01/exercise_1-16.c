@@ -22,26 +22,34 @@ int main()
 
     max_length = 0;
 
-    while((line_length = get_line(line, MAXLINE)) > 0)
+    while ((line_length = get_line(line, MAXLINE)) > 0)
     {
-        if(line_length > max_length)
+        // Count the longest input line.
+        if (line_length == MAXLINE - 1  && line[MAXLINE - 2] != '\n')
+        {
+            while (getchar() != '\n')
+            {
+                ++line_length;
+            }
+
+            // Include the newline character.
+            ++line_length;
+        }
+
+        if (line_length > max_length)
         {
             max_length = line_length;
             copy(line, longest);
         }
-    
     }
 
-    if (max_length > 0)
+    if (max_length <= MAXLINE )
     {   
-        if(max_length > MAXLINE)
-        {
-            printf("Longest line (%d chars):\n%s\n", max_length, longest);
-        }
-        else
-        {
-            printf("Longest line (%d chars):\n%s\n", max_length, longest);
-        }
+        printf("Longest line (%d chars):\n%s\n", max_length, longest);
+    }
+    else if(max_length > MAXLINE)
+    {
+        printf("Longest line (%d chars):\n%s...\n", max_length, longest);
     }
     else
     {
@@ -57,33 +65,22 @@ int get_line(char line[], int maxline)
 {
     int index;
     int chars;
-    int count_chars;
-    
-    count_chars = 0;
-    index = 0;
 
-    while ((chars = getchar()) != EOF && chars != '\n')
-    {   
-        if (index < (maxline - 1))
-        {
-            line[index] = chars;
-        }
-
-        ++count_chars;
-        ++index;
+    for (index = 0; index < maxline - 1 && (chars = getchar()) != EOF  && chars != '\n'; ++index)
+    {
+        line[index] = chars;
     }
 
     if (chars == '\n')
     {
-        line[index] = '\n';
+        line[index] = chars;
 
-        ++count_chars;
         ++index;
     }
     
     line[index] = '\0';
 
-    return count_chars;
+    return index;
 }
 
 // copy(): copy from into to
@@ -93,11 +90,8 @@ void copy(char from[], char to[])
 
     index = 0;
 
-    while((to[index] = from[index]) != '\0')
+    while ((to[index] = from[index]) != '\0')
     {
         ++index;
     }
-
-    to[index] = '\0';
-
 }
