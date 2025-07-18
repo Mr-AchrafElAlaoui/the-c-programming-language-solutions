@@ -18,10 +18,26 @@ int main()
     char line[MAXLINE]; // Current input line.
 
     while ((line_length = get_line(line, MAXLINE)) > 0)
-    {        
-        if (line_length > 80)
+    {   
+        // line overflow the buffer, count its size. 
+        if (line_length == MAXLINE - 1 && line[MAXLINE - 2] != '\n')
         {
-            printf("%s",line);
+            while (getchar() != '\n')
+                ++line_length;
+            // Include the newline character.
+            ++line_length;
+        }
+
+        if (line_length > LIMIT)
+        {
+            if (line_length > MAXLINE - 1)
+            {
+                printf("Line (%d chars):\n%s...\n", line_length, line);
+            }
+            else 
+            {
+                printf("Line (%d chars):\n%s",line_length, line);
+            }
         }   
     }
 
@@ -36,31 +52,21 @@ int get_line(char line[],int maxline)
 {
     int index;
     int chars;
-    int count_chars;
 
-    index = 0;
-    count_chars = 0;
-
-    while ((chars = getchar()) != EOF && chars != '\n')
+    for (index = 0; index < maxline -1 && (chars = getchar()) != EOF && chars != '\n'; ++index)
     {
-        if(index < maxline - 1)
-        {
-            line[index] = chars;
-        }
+        line[index] = chars;
 
-        ++count_chars;
-        ++index;
     }
 
     if (chars == '\n')
     {
         line[index] = '\n';
         
-        ++count_chars;
         ++index;
     }
     // To mark the end.
     line[index] = '\0';
 
-    return count_chars;
+    return index;
 }
