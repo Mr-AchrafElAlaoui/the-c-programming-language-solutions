@@ -1,1 +1,1 @@
-# The C Programming Language — Exercise Solutions
+# The C Programming Language — Exercise Solutions.
